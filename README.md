@@ -1,16 +1,250 @@
-# React + Vite
+# MLens – Machine Learning Model Analysis Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MLens is a web-based machine learning dashboard that helps users analyze datasets, train multiple machine learning models, compare their performance, and gain insights from evaluation results — all through a user-friendly interface.
 
-Currently, two official plugins are available:
+The goal of MLens is to simplify the machine learning workflow by making model experimentation and evaluation more accessible, without requiring users to manually write extensive machine learning code.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Dataset Analysis:** Upload CSV datasets and explore their structure and features.
+- **Automated Problem Detection:** Identify whether a machine learning task is classification or regression.
+- **Model Training:** Train and evaluate multiple machine learning algorithms.
+- **Model Comparison:** Compare model performance using relevant evaluation metrics.
+- **Performance Metrics:** View classification and regression metrics, including accuracy, F1-score, MAE, MSE, RMSE, and R² where applicable.
+- **Model Arena:** Run machine learning experiments and view evaluation results.
+- **Insights Dashboard:** Understand model performance, identify key findings, and view recommendations.
+- **Interactive Interface:** Navigate between dataset analysis, experiments, model comparison, and insights through a React-based dashboard.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+### Frontend
+- React.js
+- Vite
+- JavaScript
+- HTML5
+- CSS3
+- React Router
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend
+- Python
+- FastAPI
+- Uvicorn
+
+### Machine Learning and Data Processing
+- Scikit-learn
+- Pandas
+- NumPy
+
+## Project Structure
+
+```text
+MLens/
+├── backend/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── ...
+│
+├── src/
+│   ├── layouts/
+│   ├── pages/
+│   │   ├── Dashboard.jsx
+│   │   ├── Dataset.jsx
+│   │   ├── Experiments.jsx
+│   │   ├── ModelArena.jsx
+│   │   ├── Compare.jsx
+│   │   └── Insights.jsx
+│   ├── App.jsx
+│   └── ...
+│
+├── public/
+├── package.json
+├── index.html
+├── .gitignore
+└── README.md
+```
+
+*Note: The structure above is illustrative. Your actual folder and file names may differ.*
+
+## Getting Started
+
+Follow these steps to run MLens locally.
+
+### Prerequisites
+
+Make sure you have installed:
+
+- [Node.js](https://nodejs.org/)
+- [Python](https://www.python.org/)
+- [Git](https://git-scm.com/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/YOUR-USERNAME/MLens.git
+cd MLens
+```
+
+Replace `YOUR-USERNAME` with your GitHub username.
+
+### 2. Set Up the Backend
+
+Open a terminal in the project root and navigate to the backend folder:
+
+```bash
+cd backend
+```
+
+Create a Python virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Activate the environment on Windows:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+If you use Command Prompt instead of PowerShell:
+
+```cmd
+venv\Scripts\activate.bat
+```
+
+Install the Python dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+If a `requirements.txt` file is not present, create one containing the project's actual Python dependencies before running this command.
+
+Start the FastAPI server:
+
+```bash
+uvicorn main:app --reload
+```
+
+The backend should be available at:
+
+- API: http://127.0.0.1:8000
+- Interactive API documentation: http://127.0.0.1:8000/docs
+
+Keep this terminal running.
+
+### 3. Set Up the Frontend
+
+Open a second terminal in the project root.
+
+Install the frontend dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open the local URL displayed in your terminal, typically:
+
+http://localhost:5173
+
+Keep the frontend and backend running in separate terminals.
+
+## How to Use MLens
+
+1. Launch the MLens web application.
+2. Navigate to the dataset or experiment section.
+3. Upload or select a CSV dataset.
+4. Select the target column you want to predict.
+5. Run the machine learning experiment.
+6. Review the evaluation results generated by the backend.
+7. Navigate to the Model Comparison section to compare model performance.
+8. Open the Insights section to review findings and recommendations.
+
+Available options and evaluation metrics depend on the dataset, supported algorithms, and the backend implementation.
+
+## API Endpoints
+
+The FastAPI backend provides endpoints for the machine learning workflow.
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /` | Check whether the backend is running |
+| `POST /analyze` | Analyze a dataset |
+| `POST /upload` | Upload dataset data |
+| `POST /train` | Train a machine learning model |
+| `POST /train-all` | Train and compare multiple models |
+
+For request parameters, response formats, and interactive testing, visit:
+
+http://127.0.0.1:8000/docs
+
+## Evaluation Metrics
+
+MLens can display metrics appropriate to the problem type.
+
+### Classification
+
+- **Accuracy:** Proportion of predictions that are correct.
+- **F1-score:** Balance between precision and recall.
+- **Macro F1-score:** Average F1-score across classes, treating each class equally.
+- **Balanced Accuracy:** Average recall across classes.
+- **Training Time:** Time taken to train a model.
+
+### Regression
+
+- **MAE:** Mean Absolute Error.
+- **MSE:** Mean Squared Error.
+- **RMSE:** Root Mean Squared Error.
+- **R² Score:** Indicates how well a model explains variation in the target variable.
+- **Training Time:** Time taken to train a model.
+
+Not every metric applies to every model or problem type.
+
+## Current Development Status
+
+MLens is an actively developed project focused on building an integrated machine learning experimentation dashboard.
+
+Current development areas include:
+
+- Connecting the React frontend to the FastAPI backend.
+- Automating model training and evaluation.
+- Presenting model comparisons in a clear format.
+- Generating useful insights from evaluation results.
+- Improving the usability and reliability of the dashboard.
+
+## Future Enhancements
+
+Potential future improvements include:
+
+- Support for additional machine learning algorithms.
+- Dataset preprocessing and missing-value handling.
+- Hyperparameter tuning.
+- Visualizations for dataset distributions and model performance.
+- Experiment history and saved results.
+- Exportable evaluation reports.
+- Improved model recommendations.
+
+## Contributing
+
+Contributions, suggestions, and bug reports are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Push the branch to your fork.
+5. Open a pull request describing your changes.
+
+## License
+
+This project is currently available for educational and development purposes. Add a `LICENSE` file to specify the terms under which others may use, modify, and distribute the project.
+
+---
+
+**MLens — Making Machine Learning Experiments Easier to Understand.**
